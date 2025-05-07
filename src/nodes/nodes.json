@@ -3,5 +3,6 @@
     { "id": "b", "type": "position-logger", "position": { "x": -100, "y": 100 }, "data": { "label": "drag me!" } },
     { "id": "c", "position": { "x": 100, "y": 100 }, "data": { "label": "your ideas" } },
     { "id": "d", "type": "output", "position": { "x": 0, "y": 200 }, "data": { "label": "with React Flow" } },
-    { "id": "e", "position": { "x": 0, "y": 300 }, "data": { "label": "just added" } }
+    { "id": "e", "position": { "x": 0, "y": 300 }, "data": { "label": "just added" } },
+    { "id": "f", "position": { "x": 0, "y": 400 }, "data": { "label": "added another one" } }
 ]
