@@ -37,7 +37,7 @@ export default function App() {
 
     async function loadMarkdown() {
       try {
-        const mdModule = await import(`./content/${selectedNode!.id}.md?raw`);
+        const mdModule = await import(`./nodes/content/${selectedNode!.id}.md?raw`);
         setMarkdownContent(mdModule.default);
       } catch (error) {
         setMarkdownContent('# No content available for this node.');
@@ -79,8 +79,8 @@ export default function App() {
           onNodeClick={onNodeClick}
           fitView
         >
-          <Background />
-          <MiniMap />
+          {/* <Background /> */}
+          {/* <MiniMap /> */}
           <Controls />
         </ReactFlow>
       </div>
