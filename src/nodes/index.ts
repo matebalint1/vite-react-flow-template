@@ -18,6 +18,7 @@ export const initialNodes: AppNode[] = [
     position: { x: 0, y: 200 },
     data: { label: 'with React Flow' },
   },
+  { id: 'e', position: { x: 0, y: 300 }, data: { label: 'just added' } },
 ];
 
 export const nodeTypes = {

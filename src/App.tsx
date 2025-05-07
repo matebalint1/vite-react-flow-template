@@ -1,4 +1,4 @@
-import { useCallback } from 'react';
+import { useCallback, useState, type MouseEvent } from 'react';
 import {
   ReactFlow,
   Background,
@@ -8,6 +8,7 @@ import {
   useNodesState,
   useEdgesState,
   type OnConnect,
+  type Node,
 } from '@xyflow/react';
 
 import '@xyflow/react/dist/style.css';
@@ -18,25 +19,62 @@ import { initialEdges, edgeTypes } from './edges';
 export default function App() {
   const [nodes, , onNodesChange] = useNodesState(initialNodes);
   const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
+  const [selectedNode, setSelectedNode] = useState<Node | null>(null);
+
   const onConnect: OnConnect = useCallback(
     (connection) => setEdges((edges) => addEdge(connection, edges)),
     [setEdges]
   );
 
+  const onNodeClick = useCallback(
+    (event: MouseEvent, node: Node) => {
+      setSelectedNode(node);
+    },
+    []
+  );
+
+  const closeModal = () => setSelectedNode(null);
+
   return (
-    <ReactFlow
-      nodes={nodes}
-      nodeTypes={nodeTypes}
-      onNodesChange={onNodesChange}
-      edges={edges}
-      edgeTypes={edgeTypes}
-      onEdgesChange={onEdgesChange}
-      onConnect={onConnect}
-      fitView
-    >
-      <Background />
-      <MiniMap />
-      <Controls />
-    </ReactFlow>
+    <div style={{ display: 'flex', height: '100vh' }}>
+      <div style={{ flexGrow: 1 }}>
+        <ReactFlow
+          nodes={nodes}
+          nodeTypes={nodeTypes}
+          onNodesChange={onNodesChange}
+          edges={edges}
+          edgeTypes={edgeTypes}
+          onEdgesChange={onEdgesChange}
+          onConnect={onConnect}
+          onNodeClick={onNodeClick}
+          fitView
+        >
+          <Background />
+          <MiniMap />
+          <Controls />
+        </ReactFlow>
+      </div>
+
+      {selectedNode && (
+        <div
+          style={{
+            width: '30vw',
+            backgroundColor: '#f0f0f0',
+            borderLeft: '1px solid #ccc',
+            padding: '1rem',
+            overflowY: 'auto',
+          }}
+        >
+          <button onClick={closeModal} style={{ marginBottom: '1rem' }}>
+            Close
+          </button>
+          <h2>Node Details</h2>
+          <p><strong>ID:</strong> {selectedNode.id}</p>
+          {/* <p><strong>Label:</strong> {selectedNode.data.label}</p> */}
+          <p><strong>Label:</strong> {"hello"}</p>
+          {/* Add more node data display here as needed */}
+        </div>
+      )}
+    </div>
   );
 }
