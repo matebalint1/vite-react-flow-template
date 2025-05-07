@@ -10,6 +10,7 @@ import {
   type OnConnect,
   type Node,
 } from '@xyflow/react';
+import ReactMarkdown from 'react-markdown';
 
 import '@xyflow/react/dist/style.css';
 
@@ -20,11 +21,30 @@ export default function App() {
   const [nodes, , onNodesChange] = useNodesState(initialNodes);
   const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
   const [selectedNode, setSelectedNode] = useState<Node | null>(null);
+  const [markdownContent, setMarkdownContent] = useState<string>('');
 
   const onConnect: OnConnect = useCallback(
     (connection) => setEdges((edges) => addEdge(connection, edges)),
     [setEdges]
   );
+
+  // Load markdown content when node is selected
+  useEffect(() => {
+    if (!selectedNode) {
+      setMarkdownContent('');
+      return;
+    }
+
+    async function loadMarkdown() {
+      try {
+        const mdModule = await import(`./content/${selectedNode!.id}.md?raw`);
+        setMarkdownContent(mdModule.default);
+      } catch (error) {
+        setMarkdownContent('# No content available for this node.');
+      }
+    }
+    loadMarkdown();
+  }, [selectedNode]);
 
   const onNodeClick = useCallback(
     (event: MouseEvent, node: Node) => {
@@ -80,9 +100,10 @@ export default function App() {
             Close
           </button>
           <h2>Node Details</h2>
-          <p><strong>ID:</strong> {selectedNode.id}</p>
-          <p><strong>Label:</strong> {"hello"}</p>
-          {/* Add more node data display here as needed */}
+          <p>
+            <strong>ID:</strong> {selectedNode.id}
+          </p>
+          <ReactMarkdown>{markdownContent}</ReactMarkdown>
         </div>
       )}
     </div>
