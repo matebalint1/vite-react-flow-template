@@ -1,4 +1,3 @@
-// scripts/generateMarkdown.js
 import fs from 'fs/promises';
 import path from 'path';
 import { fileURLToPath } from 'url';
@@ -7,30 +6,65 @@ import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const nodesPath = path.join(__dirname, '../src/nodes/nodes.json');
-const contentDir = path.join(__dirname, '../src/nodes/content');
+const topicsDir = path.join(__dirname, '../src/topics');
+
+// Parse command line arguments for --overwrite flag
+const args = process.argv.slice(2);
+const overwrite = args.includes('--overwrite');
 
 async function generateMarkdown() {
   try {
-    // Ensure content directory exists
-    await fs.mkdir(contentDir, { recursive: true });
+    const topicEntries = await fs.readdir(topicsDir, { withFileTypes: true });
+    const topicDirs = topicEntries.filter(entry => entry.isDirectory());
 
-    // Read and parse nodes.json
-    const nodesRaw = await fs.readFile(nodesPath, 'utf-8');
-    const nodes = JSON.parse(nodesRaw);
-
-    for (const node of nodes) {
-      const fileName = `${node.id}.md`;
-      const filePath = path.join(contentDir, fileName);
+    for (const topicDir of topicDirs) {
+      const topicId = topicDir.name;
+      const nodesJsonPath = path.join(topicsDir, topicId, 'nodes', 'nodes.json');
+      const contentDir = path.join(topicsDir, topicId, 'nodes', 'content');
 
       try {
-        await fs.access(filePath);
-        console.log(`Markdown file already exists: ${fileName}`);
-      } catch {
-        // File does not exist, create it
-        const content = `# Node ${node.id}\n\nThis is auto-generated markdown content for node **${node.id}**.\n\n- Label: ${node.data?.label ?? 'N/A'}\n- Position: (${node.position.x}, ${node.position.y})\n`;
-        await fs.writeFile(filePath, content, 'utf-8');
-        console.log(`Created markdown file: ${fileName}`);
+        const nodesRaw = await fs.readFile(nodesJsonPath, 'utf-8');
+        const nodes = JSON.parse(nodesRaw);
+
+        await fs.mkdir(contentDir, { recursive: true });
+
+        for (const node of nodes) {
+          const fileName = `${node.id}.md`;
+          const filePath = path.join(contentDir, fileName);
+
+          let fileExists = false;
+          try {
+            await fs.access(filePath);
+            fileExists = true;
+          } catch {
+            // File does not exist
+            fileExists = false;
+          }
+
+          if (fileExists && !overwrite) {
+            console.log(`[${topicId}] Markdown file already exists and overwrite flag not set: ${fileName}`);
+            continue;
+          }
+
+          const label = node.data?.label ?? 'N/A';
+          const content = `# Learning Path Topic: ${topicId}
+
+## Learning Nugget Label: ${label}
+
+**Topic ID:** ${topicId}  
+**Node ID:** ${node.id}  
+**Position:** (${node.position.x}, ${node.position.y})
+
+---
+
+This is auto-generated markdown content for node **${node.id}** in topic **${topicId}**.
+`;
+
+          await fs.writeFile(filePath, content, 'utf-8'); // fs.writeFile overwrites by default
+          console.log(`[${topicId}] ${fileExists ? 'Overwritten' : 'Created'} markdown file: ${fileName}`);
+        }
+      } catch (err) {
+        console.warn(`Skipping topic "${topicId}" due to error: ${err.message}`);
       }
     }
   } catch (error) {
