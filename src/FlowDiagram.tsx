@@ -90,7 +90,6 @@ export default function FlowDiagram() {
     if (
       selectedNode &&
       modalRef.current &&
-      event.target instanceof Node === false &&
       event.target instanceof Node &&
       !modalRef.current.contains(event.target)
     ) {
