@@ -1,8 +1,16 @@
 [
-    { "id": "a", "type": "input", "position": { "x": 0, "y": 0 }, "data": { "label": "wire" } },
-    { "id": "b", "type": "position-logger", "position": { "x": -100, "y": 100 }, "data": { "label": "drag me!" } },
-    { "id": "c", "position": { "x": 100, "y": 100 }, "data": { "label": "your ideas" } },
-    { "id": "d", "type": "output", "position": { "x": 0, "y": 200 }, "data": { "label": "with React Flow" } },
-    { "id": "e", "type": "group", "position": { "x": 0, "y": 300 }, "data": { "label": "just added" } },
-    { "id": "f", "type": "default", "position": { "x": 0, "y": 400 }, "data": { "label": "added another one" } }
+    { "id": "fzi-sdv", "type": "input", "position": { "x": 0, "y": 0 }, "data": { "label": "SDV" } },
+    { "id": "fzi-nutzerfunktion", "type": "maintopic", "position": { "x": -600, "y": 100 }, "data": { "label": "Nutzerfunktion" } },
+    { "id": "fzi-personalization", "type": "subtopic", "position": { "x": -400, "y": 150 }, "data": { "label": "Personalisierung" } },
+    { "id": "fzi-autonomy", "type": "subtopic", "position": { "x": -400, "y": 200 }, "data": { "label": "Autonomie" } },
+    { "id": "fzi-connectivity", "type": "subtopic", "position": { "x": -400, "y": 250 }, "data": { "label": "Connectivity" } },
+    { "id": "fzi-architektur", "type": "output", "position": { "x": -200, "y": 100 }, "data": { "label": "Architektur" } },
+    { "id": "fzi-lebenszyklus", "type": "default", "position": { "x": 200, "y": 100 }, "data": { "label": "Lebenszyklus" } },
+    { "id": "fzi-organisatorisch", "type": "output", "position": { "x": 500, "y": 100 }, "data": { "label": "Organisatorisch" } }, 
+    { "id": "fzi-usw", "type": "output", "position": { "x": -600, "y": 300 }, "data": { "label": "usw." } },
+    { "id": "fzi-ota-group", "type": "group", "position": { "x": 300, "y": 200 }, "style": { "width": 220, "height": 230 },"data": { "label": "Maintenance" } },
+    { "id": "fzi-ota", "type": "subtopic", "position": { "x": 320, "y": 220 }, "data": { "label": "OTA updates" } },
+    { "id": "fzi-otb", "type": "subtopic", "position": { "x": 320, "y": 270 }, "data": { "label": "OTB updates" } },
+    { "id": "fzi-otc", "type": "subtopic", "position": { "x": 320, "y": 320 }, "data": { "label": "OTC updates" } },
+    { "id": "fzi-otd", "type": "subtopic", "position": { "x": 320, "y": 370 }, "data": { "label": "OTD updates" } }
 ]

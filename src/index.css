@@ -10,3 +10,24 @@ body,
   height: 100%;
   margin: 0;
 }
+
+.react-flow__handle {
+  visibility: hidden;
+}
+
+.react-flow__handle-right {
+  right: 0;    /* Ensure it's at the edge */
+  transform: translateY(-50%);
+}
+.react-flow__handle-left {
+  left: 0;
+  transform: translateY(-50%);
+}
+.react-flow__handle-top {
+  top: 0;
+  transform: translateX(-50%);
+}
+.react-flow__handle-bottom {
+  bottom: 0;
+  transform: translateX(-50%);
+}

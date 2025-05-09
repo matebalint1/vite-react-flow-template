@@ -6,7 +6,7 @@ const topics = [
   { id: 'sdv', title: 'SDV' },
   { id: 'open-source', title: 'Open-Source' },
   { id: 'ota', title: 'OTA Updates' },
-  { id: 'sys-eng', title: 'System Engineer' },
+  { id: 'mbse', title: 'MBSE' },
   { id: 'dummy1', title: 'Placeholder1' },
   { id: 'dummy2', title: 'Placeholder2' },
   { id: 'dummy3', title: 'Placeholder3' },

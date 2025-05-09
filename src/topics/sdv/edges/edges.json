@@ -1,6 +1,12 @@
 [
-    { "id": "a->c", "source": "a", "target": "c", "animated": false },
-    { "id": "b->d", "source": "b", "target": "d" },
-    { "id": "c->d", "source": "c", "target": "d", "animated": false }
+    { "id": "fzi-sdv->fzi-nutzerfunktion", "source": "fzi-sdv", "target": "fzi-nutzerfunktion" },
+    { "id": "fzi-sdv->fzi-architektur", "source": "fzi-sdv", "target": "fzi-architektur" },
+    { "id": "fzi-sdv->fzi-lebenszyklus", "source": "fzi-sdv", "target": "fzi-lebenszyklus" },
+    { "id": "fzi-sdv->fzi-organisatorisch", "source": "fzi-sdv", "target": "fzi-organisatorisch" },
+    { "id": "fzi-lebenszyklus->fzi-ota-group", "source": "fzi-lebenszyklus", "target": "fzi-ota-group",  "style": { "strokeDasharray": "5,5" } },
+    { "id": "fzi-nutzerfunktion->fzi-personalization", "source": "fzi-nutzerfunktion", "sourceHandle": "right", "target": "fzi-personalization",  "style": { "strokeDasharray": "5,5" } },
+    { "id": "fzi-nutzerfunktion->fzi-autonomy", "source": "fzi-nutzerfunktion", "sourceHandle": "right", "target": "fzi-autonomy",  "style": { "strokeDasharray": "5,5" } },
+    { "id": "fzi-nutzerfunktion->fzi-connectivity", "source": "fzi-nutzerfunktion", "sourceHandle": "right", "target": "fzi-connectivity",  "style": { "strokeDasharray": "5,5" } },
+    { "id": "fzi-nutzerfunktion->fzi-usw", "source": "fzi-nutzerfunktion", "target": "fzi-usw" }
 ]
   
