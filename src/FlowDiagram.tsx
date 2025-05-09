@@ -133,7 +133,25 @@ export default function FlowDiagram() {
           <p>
             <strong>ID:</strong> {selectedNode.id}
           </p>
-          <ReactMarkdown>{markdownContent}</ReactMarkdown>
+          <ReactMarkdown
+            components={{
+              img: ({node, ...props}) => (
+                <img
+                  {...props}
+                  style={{
+                    maxWidth: '100%', // or a fixed width, e.g. '400px'
+                    height: 'auto',
+                    display: 'block',
+                    margin: '0 auto',
+                  }}
+                  alt={props.alt}
+                />
+              ),
+            }}
+          >
+            {markdownContent}
+          </ReactMarkdown>
+
         </div>
       )}
     </div>
