@@ -10,6 +10,8 @@ import {
 } from '@xyflow/react';
 import ReactMarkdown from 'react-markdown';
 import { useParams } from 'react-router-dom';
+import rehypeRaw from 'rehype-raw';
+
 
 import '@xyflow/react/dist/style.css';
 
@@ -133,7 +135,7 @@ export default function FlowDiagram() {
           <p>
             <strong>ID:</strong> {selectedNode.id}
           </p>
-          <ReactMarkdown
+          {/* <ReactMarkdown
             components={{
               img: ({node, ...props}) => (
                 <img
@@ -150,8 +152,10 @@ export default function FlowDiagram() {
             }}
           >
             {markdownContent}
+          </ReactMarkdown> */}
+          <ReactMarkdown rehypePlugins={[rehypeRaw]}>
+            {markdownContent}
           </ReactMarkdown>
-
         </div>
       )}
     </div>
